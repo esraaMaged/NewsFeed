@@ -22,7 +22,7 @@ import { useTheme } from '@react-navigation/native';
 import {useColorScheme} from 'react-native';
 
 let deviceWidth = Dimensions.get("window").width;
-function MainScreen({ navigation }: StackScreenProps<"Home">) {
+function MainScreen({ navigation }: StackScreenProps<"News">) {
   const [fetchedNews, setFetchedNews] = useState<NewsArticleModel[]>([]);
 
   const [search, setSearch] = useState("");
