@@ -1,12 +1,19 @@
 import { View, ActivityIndicator, StyleSheet, ImageBackground, Text } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
+import { useTheme } from '@react-navigation/native';
+import {useColorScheme} from 'react-native';
+
 type Param = {
   isLoading: boolean
 }
 function LoadingAndErrorOverlay(props: Param) {
+  //theme
+  const { colors } = useTheme();
+  const scheme = useColorScheme();
+  let gradientBackGroundEnd = scheme === "dark" ? "#FCA009" : "#0B5345"
   return (
-    <LinearGradient colors={["#F5B7B1", "#154360"]} style={styles.rootScreen}>
+    <LinearGradient colors={[colors.background, gradientBackGroundEnd]} style={styles.rootScreen}>
       <ImageBackground
         source={require("../assets/newsbackgroundImage.png")}
         resizeMode="cover"

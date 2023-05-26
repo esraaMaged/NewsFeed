@@ -5,10 +5,17 @@ import MainScreen from './screens/MainScreen';
 import NewsDetailsScreen from './screens/NewsDetailsScreen';
 import NewsArticleModel from './models/NewsArticleModel';
 
+// color scheme hook
+import {useColorScheme} from 'react-native';
+// theme components and the navigation container
+import {DarkTheme,DefaultTheme} from '@react-navigation/native'; 
+
 export default function App() {
+  const scheme = useColorScheme();
+  // console.log("system theme" + scheme)
   const Stack = createNativeStackNavigator<StackParamList>();
   return (
-    <NavigationContainer>
+    <NavigationContainer theme={scheme === 'dark' ? DarkTheme : DefaultTheme}>
       <Stack.Navigator>
         <Stack.Screen name="Home" component={MainScreen} />
         <Stack.Screen name="NewsDetails" component={NewsDetailsScreen} />

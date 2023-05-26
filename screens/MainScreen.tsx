@@ -11,12 +11,15 @@ import { StackScreenProps } from "../App";
 import MainMenuItemModel from "../models/MainMenuItemModel";
 import MainMenu from "../components/MainMenu";
 import { useEffect, useState } from "react";
-import { NEWS_URL } from "../utils/httpRequests";
+import { NEWS_URL } from "../utils/HttpRequests";
 import axios from "axios";
 import NewsArticleModel from "../models/NewsArticleModel";
 import { LinearGradient } from "expo-linear-gradient";
 import { SearchBar } from "@rneui/themed";
 import LoadingAndErrorOverlay from "../components/LoadingandErrorOverlay";
+
+import { useTheme } from '@react-navigation/native';
+import {useColorScheme} from 'react-native';
 
 let deviceWidth = Dimensions.get("window").width;
 function MainScreen({ navigation }: StackScreenProps<"Home">) {
@@ -27,6 +30,11 @@ function MainScreen({ navigation }: StackScreenProps<"Home">) {
 
   const [isFetching, setIsFetching] = useState(false);
   const [hasError, setHasError] = useState(false);
+
+  //theme
+  const { colors } = useTheme();
+  const scheme = useColorScheme();
+  let gradientBackGroundEnd = scheme === "dark" ? "#DE9954" : "#0B5345"
 
   useEffect(() => {
     setIsFetching(true)
@@ -63,7 +71,7 @@ function MainScreen({ navigation }: StackScreenProps<"Home">) {
 
   /// pull to refresh functionality
   function menuGotRefreshed() {
-    console.log("pullToRefresh")
+    // console.log("pullToRefresh")
     fetchUser();
   }
 
@@ -98,8 +106,9 @@ function MainScreen({ navigation }: StackScreenProps<"Home">) {
     });
   }
 
+
   return (
-    <LinearGradient colors={["#F5B7B1", "#154360"]} style={styles.rootScreen}>
+    <LinearGradient colors={[colors.background, gradientBackGroundEnd]} style={styles.rootScreen}>
       <ImageBackground
         source={require("../assets/newsbackgroundImage.png")}
         resizeMode="cover"
