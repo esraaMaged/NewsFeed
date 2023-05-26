@@ -35,14 +35,8 @@ function MainMenu(props: Pram)
     }
     function render() {
       if (refreshing) {
+        refreshing = false
         props.refreshControl()
-        return (
-          //loading view while data is loading
-          <View style={{ flex: 1,  backgroundColor: "#C2185B", paddingTop: 20 }}>
-          <Text> HErereree!</Text>
-            <ActivityIndicator />
-          </View>
-        );
       }
     }
 

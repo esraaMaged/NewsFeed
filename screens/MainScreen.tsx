@@ -1,5 +1,11 @@
-import React from 'react';
-import { Text, Dimensions, View, ImageBackground,} from "react-native";
+import React from "react";
+import {
+  Text,
+  Dimensions,
+  View,
+  ImageBackground,
+  ActivityIndicator,
+} from "react-native";
 import { StyleSheet } from "react-native";
 import { StackScreenProps } from "../App";
 import MainMenuItemModel from "../models/MainMenuItemModel";
@@ -10,6 +16,7 @@ import axios from "axios";
 import NewsArticleModel from "../models/NewsArticleModel";
 import { LinearGradient } from "expo-linear-gradient";
 import { SearchBar } from "@rneui/themed";
+import LoadingAndErrorOverlay from "../components/LoadingandErrorOverlay";
 
 let deviceWidth = Dimensions.get("window").width;
 function MainScreen({ navigation }: StackScreenProps<"Home">) {
@@ -18,7 +25,11 @@ function MainScreen({ navigation }: StackScreenProps<"Home">) {
   const [search, setSearch] = useState("");
   const [filteredNews, setFilteredNews] = useState<NewsArticleModel[]>([]);
 
+  const [isFetching, setIsFetching] = useState(false);
+  const [hasError, setHasError] = useState(false);
+
   useEffect(() => {
+    setIsFetching(true)
     fetchUser();
   }, []);
 
@@ -26,19 +37,34 @@ function MainScreen({ navigation }: StackScreenProps<"Home">) {
   const fetchUser = async () => {
     /// get data from api
     const url = NEWS_URL;
-    const response = await axios.get(url);
-    /// render data type
-    let newsObj: MainMenuItemModel = response.data;
-    let listOfNewArticles: NewsArticleModel[] = newsObj.articles;
+    try {
+      const response = await axios.get(url);
+      /// render data type
+      let newsObj: MainMenuItemModel = response.data;
+      let listOfNewArticles: NewsArticleModel[] = newsObj.articles;
       // console.log(listOfNewArticles)
-    /// set state of changed data
-    setFetchedNews(listOfNewArticles);
-    setFilteredNews(listOfNewArticles);
+      /// set state of changed data
+      setFetchedNews(listOfNewArticles);
+      setFilteredNews(listOfNewArticles);
+      setHasError(false)
+    } catch (error) {
+      setHasError(true)
+    }
+    setIsFetching(false)
   };
 
+  if (isFetching) {
+    return <LoadingAndErrorOverlay isLoading={true} />;
+  }
+  if (hasError && !isFetching) {
+    return <LoadingAndErrorOverlay isLoading={false} />
+  }
+
+
   /// pull to refresh functionality
-  function menuGotRefreshed(){
-    fetchUser()
+  function menuGotRefreshed() {
+    console.log("pullToRefresh")
+    fetchUser();
   }
 
   /// Search Fuctionality
@@ -67,7 +93,6 @@ function MainScreen({ navigation }: StackScreenProps<"Home">) {
 
   function menuItemPressed(itemDetails: NewsArticleModel) {
     // console.log(itemDetails);
-    
     navigation.navigate("NewsDetails", {
       itemDetails: itemDetails,
     });
@@ -81,25 +106,25 @@ function MainScreen({ navigation }: StackScreenProps<"Home">) {
         style={styles.rootScreen}
         imageStyle={styles.backgroundImage}
       >
-          <View style={styles.container}>
-            <SearchBar
-              platform="default"
-              round
-              lightTheme
-              searchIcon={{ size: 24 }}
-              onChangeText={(text: string) => searchFilterFunction(text)}
-              onClear={() => searchFilterFunction("")}
-              placeholder="Type Here..."
-              value={search}
-              containerStyle={styles.searchBarStyle}
-              inputContainerStyle={styles.searchBarInnerStyle}
-            />
-            <MainMenu
-              menuData={filteredNews}
-              onMenuItemPressed={menuItemPressed}
-              refreshControl= {menuGotRefreshed}
-            />
-          </View>
+        <View style={styles.container}>
+          <SearchBar
+            platform="default"
+            round
+            lightTheme
+            searchIcon={{ size: 24 }}
+            onChangeText={(text: string) => searchFilterFunction(text)}
+            onClear={() => searchFilterFunction("")}
+            placeholder="Type Here..."
+            value={search}
+            containerStyle={styles.searchBarStyle}
+            inputContainerStyle={styles.searchBarInnerStyle}
+          />
+          <MainMenu
+            menuData={filteredNews}
+            onMenuItemPressed={menuItemPressed}
+            refreshControl={menuGotRefreshed}
+          />
+        </View>
       </ImageBackground>
     </LinearGradient>
   );
@@ -126,11 +151,5 @@ const styles = StyleSheet.create({
   },
   backgroundImage: {
     opacity: 0.15,
-  },
-  scrollView: {
-    flex: 1,
-    backgroundColor: 'pink',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
 });
