@@ -3,6 +3,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator, NativeStackScreenProps } from "@react-navigation/native-stack";
 import MainScreen from './screens/MainScreen';
 import NewsDetailsScreen from './screens/NewsDetailsScreen';
+import NewsArticleModel from './models/NewsArticleModel';
 
 export default function App() {
   const Stack = createNativeStackNavigator<StackParamList>();
@@ -18,7 +19,7 @@ export default function App() {
 
 type StackParamList = {
   Home: undefined
-  NewsDetails: undefined
+  NewsDetails: {itemDetails: NewsArticleModel}
 }
 
 export type StackScreenProps<T extends keyof StackParamList> = NativeStackScreenProps< StackParamList, T>

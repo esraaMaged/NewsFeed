@@ -3,12 +3,6 @@ import { Pressable, View, Text, StyleSheet, Platform, Image, Dimensions } from '
 type Param = {
   title: string
   img: string
-  // description: string
-  // source: string
-  // author: string
-  // content: string
-  // publishedAt: string
-
   onPress: () => void
 }
 let deviceWidth = Dimensions.get("window").width;
