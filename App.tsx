@@ -1,45 +1,38 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator, NativeStackScreenProps } from "@react-navigation/native-stack";
-import MainScreen from './screens/MainScreen';
-import NewsDetailsScreen from './screens/NewsDetailsScreen';
-import NewsArticleModel from './models/NewsArticleModel';
-import SettingsScreen from './screens/SettingsScreen';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Ionicons } from '@expo/vector-icons';
-
+import {
+  createNativeStackNavigator,
+  NativeStackScreenProps,
+} from "@react-navigation/native-stack";
+import MainScreen from "./screens/MainScreen";
+import NewsDetailsScreen from "./screens/NewsDetailsScreen";
+import NewsArticleModel from "./models/NewsArticleModel";
+import SettingsScreen from "./screens/SettingsScreen";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { Ionicons } from "@expo/vector-icons";
+//localization
+import { useTranslation } from 'react-i18next'
+import './translations/IMLocalize'
 // color scheme hook
-import {useColorScheme} from 'react-native';
+import { useColorScheme } from "react-native";
 // theme components and the navigation container
-import {DarkTheme,DefaultTheme} from '@react-navigation/native'; 
+import { DarkTheme, DefaultTheme } from "@react-navigation/native";
 
 const BottomTabs = createBottomTabNavigator<StackParamList>();
 function NewsBottomTabs() {
+  //localization
+  const { t } = useTranslation();
+  let newsTabLabel: string = t('navigate:home')
+  let settingsTabLabel: string = t('navigate:settings')
+
   return (
-    <BottomTabs.Navigator
-      screenOptions={({ navigation }) => ({
-        // headerStyle: { backgroundColor: GlobalStyles.colors.primary500 },
-        // headerTintColor: 'white',
-        // tabBarStyle: { backgroundColor: GlobalStyles.colors.primary500 },
-        // tabBarActiveTintColor: GlobalStyles.colors.accent500,
-        // headerRight: ({ tintColor }) => (
-        //   <IconButton
-        //     icon="add"
-        //     size={24}
-        //     color={tintColor}
-        //     onPress={() => {
-        //       navigation.navigate('ManageExpense');
-        //     }}
-        //   />
-        // ),
-      })}
-    >
+    <BottomTabs.Navigator>
       <BottomTabs.Screen
         name="News"
         component={MainScreen}
         options={{
-          title: 'Recent News',
-          tabBarLabel: 'News',
+          title: newsTabLabel,
+          tabBarLabel: newsTabLabel,
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="newspaper" size={size} color={color} />
           ),
@@ -49,8 +42,8 @@ function NewsBottomTabs() {
         name="Settings"
         component={SettingsScreen}
         options={{
-          title: 'Settings',
-          tabBarLabel: 'Settings',
+          title: settingsTabLabel,
+          tabBarLabel: settingsTabLabel,
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="settings" size={size} color={color} />
           ),
@@ -60,28 +53,40 @@ function NewsBottomTabs() {
   );
 }
 
-
 export default function App() {
+  //localization
+  const { t, i18n } = useTranslation();
+  let lang = i18n.language;
+  let isLangRTL = lang === "ar";
+  let NewsDetails: string = t('navigate:newsDetails')
+  let backButtonTitle: string = t('navigate:back')
+
   const scheme = useColorScheme();
   const Stack = createNativeStackNavigator<StackParamList>();
   return (
-    <NavigationContainer theme={scheme === 'dark' ? DarkTheme : DefaultTheme}>
+    <NavigationContainer theme={scheme === "dark" ? DarkTheme : DefaultTheme}>
       <Stack.Navigator>
-        <Stack.Screen options={{headerShown: false}} name="NewsBottomTabs" component={NewsBottomTabs} />
-        <Stack.Screen name="NewsDetails" component={NewsDetailsScreen} />
+        
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="NewsBottomTabs"
+          component={NewsBottomTabs}
+        />
+        <Stack.Screen name="NewsDetails" component={NewsDetailsScreen} options={ {title:NewsDetails, headerBackTitleVisible: false}  }  />
       </Stack.Navigator>
     </NavigationContainer>
   );
 }
 
 type StackParamList = {
-  NewsBottomTabs: undefined
-  News: undefined
-  Settings: undefined
-  NewsDetails: {itemDetails: NewsArticleModel}
-}
+  NewsBottomTabs: undefined;
+  News: undefined;
+  Settings: undefined;
+  NewsDetails: { itemDetails: NewsArticleModel };
+};
 
-export type StackScreenProps<T extends keyof StackParamList> = NativeStackScreenProps< StackParamList, T>
+export type StackScreenProps<T extends keyof StackParamList> =
+  NativeStackScreenProps<StackParamList, T>;
 
 const styles = StyleSheet.create({
   container: {

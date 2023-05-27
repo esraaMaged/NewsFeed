@@ -11,15 +11,17 @@ import { StackScreenProps } from "../App";
 import MainMenuItemModel from "../models/MainMenuItemModel";
 import MainMenu from "../components/MainMenu";
 import { useEffect, useState } from "react";
-import { NEWS_URL } from "../utils/HttpRequests";
+import { API_KEY } from "../utils/HttpRequests";
 import axios from "axios";
 import NewsArticleModel from "../models/NewsArticleModel";
 import { LinearGradient } from "expo-linear-gradient";
 import { SearchBar } from "@rneui/themed";
 import LoadingAndErrorOverlay from "../components/LoadingandErrorOverlay";
-
-import { useTheme } from '@react-navigation/native';
-import {useColorScheme} from 'react-native';
+//theme
+import { useTheme } from "@react-navigation/native";
+import { useColorScheme } from "react-native";
+//localization
+import { useTranslation } from "react-i18next";
 
 let deviceWidth = Dimensions.get("window").width;
 function MainScreen({ navigation }: StackScreenProps<"News">) {
@@ -34,17 +36,26 @@ function MainScreen({ navigation }: StackScreenProps<"News">) {
   //theme
   const { colors } = useTheme();
   const scheme = useColorScheme();
-  let gradientBackGroundEnd = scheme === "dark" ? "#DE9954" : "#0B5345"
+  let gradientBackGroundEnd = scheme === "dark" ? "#DE9954" : "#0B5345";
+
+  const { i18n } = useTranslation();
+  let lang = i18n.language;
+  let isLangRTL = lang === "ar";
 
   useEffect(() => {
-    setIsFetching(true)
-    fetchUser();
-  }, []);
+    setIsFetching(true);
+    fetchUser()
+  }, [lang])
 
   /// fetchData functionality
   const fetchUser = async () => {
     /// get data from api
-    const url = NEWS_URL;
+    const url =
+      "https://newsapi.org/v2/everything?q=tesla&from=2023-04-27&sortBy=publishedAt&language=" +
+      lang +
+      "&apiKey=" +
+      API_KEY;
+    // console.log(url)
     try {
       const response = await axios.get(url);
       /// render data type
@@ -54,20 +65,19 @@ function MainScreen({ navigation }: StackScreenProps<"News">) {
       /// set state of changed data
       setFetchedNews(listOfNewArticles);
       setFilteredNews(listOfNewArticles);
-      setHasError(false)
+      setHasError(false);
     } catch (error) {
-      setHasError(true)
+      setHasError(true);
     }
-    setIsFetching(false)
+    setIsFetching(false);
   };
 
   if (isFetching) {
     return <LoadingAndErrorOverlay isLoading={true} />;
   }
   if (hasError && !isFetching) {
-    return <LoadingAndErrorOverlay isLoading={false} />
+    return <LoadingAndErrorOverlay isLoading={false} />;
   }
-
 
   /// pull to refresh functionality
   function menuGotRefreshed() {
@@ -106,16 +116,18 @@ function MainScreen({ navigation }: StackScreenProps<"News">) {
     });
   }
 
-
   return (
-    <LinearGradient colors={[colors.background, gradientBackGroundEnd]} style={styles.rootScreen}>
+    <LinearGradient
+      colors={[colors.background, gradientBackGroundEnd]}
+      style={styles.rootScreen}
+    >
       <ImageBackground
         source={require("../assets/newsbackgroundImage.png")}
         resizeMode="cover"
         style={styles.rootScreen}
         imageStyle={styles.backgroundImage}
       >
-        <View style={styles.container}>
+        <View style={[styles.container, {direction: isLangRTL ? "rtl" : "ltr"}]}>
           <SearchBar
             platform="default"
             round
