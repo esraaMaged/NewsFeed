@@ -24,14 +24,15 @@ https://github.com/esraaMaged/NewsFeed/assets/15037761/b4f693a2-0658-4ebc-8857-3
 
 https://github.com/esraaMaged/NewsFeed/assets/15037761/4f636dd3-f535-4459-846c-1f777cf1cedb
 
-
-
 IOS lightmode:
-<img width="444" alt="Screenshot 2023-05-27" src="(https://github.com/esraaMaged/NewsFeed/assets/15037761/738609fb-005b-4eda-aea8-7cfc6517fdd6)">
-![Simulator Screen Shot - iPhone 14 Pro Max - 2023-05-27 at 22 32 39](https://github.com/esraaMaged/NewsFeed/assets/15037761/5ffab9bb-9100-4081-9ae6-287b361d305f)
+<img width="463" alt="Screenshot 2023-05-27 at 11 05 35 PM" src="https://github.com/esraaMaged/NewsFeed/assets/15037761/a2546203-d5f9-4319-b1b0-c060df2ce3bb">
+<img width="463" alt="Screenshot 2023-05-27 at 11 05 23 PM" src="https://github.com/esraaMaged/NewsFeed/assets/15037761/9d32a558-2a4f-42cb-8d3c-01d3af3fba37">
+
+
 IOS darkmode:
-![Simulator Screen Shot - iPhone 14 Pro Max - 2023-05-27 at 22 32 06](https://github.com/esraaMaged/NewsFeed/assets/15037761/c1e40e78-17af-46c0-8c74-e74ad22225b2)
-![Simulator Screen Shot - iPhone 14 Pro Max - 2023-05-27 at 22 32 21](https://github.com/esraaMaged/NewsFeed/assets/15037761/b0d4d0da-1976-4fe7-b653-26f2ca0f6365)
+<img width="463" alt="Screenshot 2023-05-27 at 11 04 03 PM" src="https://github.com/esraaMaged/NewsFeed/assets/15037761/ae46900f-2910-4b56-b62f-e8496f692b80">
+<img width="463" alt="Screenshot 2023-05-27 at 11 03 47 PM" src="https://github.com/esraaMaged/NewsFeed/assets/15037761/77083250-c230-4509-ab67-c7f9f992f71b">
+
 
 Andriod:
 
