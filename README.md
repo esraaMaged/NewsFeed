@@ -20,6 +20,11 @@ typed word
 Video:
 
 
+https://github.com/esraaMaged/NewsFeed/assets/15037761/b4f693a2-0658-4ebc-8857-302deb37fd22
+
+
+
+
 IOS lightmode:
 ![Simulator Screen Shot - iPhone 14 Pro Max - 2023-05-27 at 22 30 54](https://github.com/esraaMaged/NewsFeed/assets/15037761/738609fb-005b-4eda-aea8-7cfc6517fdd6)
 ![Simulator Screen Shot - iPhone 14 Pro Max - 2023-05-27 at 22 32 39](https://github.com/esraaMaged/NewsFeed/assets/15037761/5ffab9bb-9100-4081-9ae6-287b361d305f)
