@@ -15,6 +15,11 @@ typed word
 - Has a **language switcher** in the Settings, that changes language Realtime or with App restart
 - Add **dark mode support** for the application with different colors for dark background and light text
 - App style dynamically updates on changes from light to dark mode and not require full restart
+- Add support for **deep linking**
+
+# In order to try Deep Links to the app, try:
+**for Settings screen:**  npx uri-scheme open "exp://127.0.0.1:19000/--/NewsBottomTabs/Settings" --ios 
+**for Main News screen:** npx uri-scheme open "exp://127.0.0.1:19000/--/NewsBottomTabs/News" --ios
 
 
 Video:
