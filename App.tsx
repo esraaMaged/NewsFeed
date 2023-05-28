@@ -18,6 +18,29 @@ import { useColorScheme } from "react-native";
 // theme components and the navigation container
 import { DarkTheme, DefaultTheme } from "@react-navigation/native";
 
+//linking
+import * as Linking from "expo-linking"
+const prefix = Linking.createURL("/");
+  const linking = {
+    prefixes: [prefix],
+    config: {
+      screens: {
+        NewsBottomTabs: {
+          path: "NewsBottomTabs",
+          screens: {
+            News: {
+              path: "News",
+            },
+            Settings: {
+              path: "Settings",
+            },
+          },
+        },
+        NewsDetails: "NewsDetails",
+      },
+    },
+  };
+
 const BottomTabs = createBottomTabNavigator<StackParamList>();
 function NewsBottomTabs() {
   //localization
@@ -55,16 +78,14 @@ function NewsBottomTabs() {
 
 export default function App() {
   //localization
-  const { t, i18n } = useTranslation();
-  let lang = i18n.language;
-  let isLangRTL = lang === "ar";
+  const { t } = useTranslation();
   let NewsDetails: string = t('navigate:newsDetails')
   let backButtonTitle: string = t('navigate:back')
 
   const scheme = useColorScheme();
   const Stack = createNativeStackNavigator<StackParamList>();
   return (
-    <NavigationContainer theme={scheme === "dark" ? DarkTheme : DefaultTheme}>
+    <NavigationContainer linking={linking} theme={scheme === "dark" ? DarkTheme : DefaultTheme}>
       <Stack.Navigator>
         
         <Stack.Screen
@@ -88,11 +109,3 @@ type StackParamList = {
 export type StackScreenProps<T extends keyof StackParamList> =
   NativeStackScreenProps<StackParamList, T>;
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});

@@ -17,6 +17,7 @@
     "axios": "^1.4.0",
     "expo": "~48.0.15",
     "expo-linear-gradient": "~12.1.2",
+    "expo-linking": "~4.0.1",
     "expo-splash-screen": "~0.18.2",
     "expo-status-bar": "~1.4.4",
     "i18next": "^22.5.0",

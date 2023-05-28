@@ -1,17 +1,22 @@
+import React, {useCallback} from 'react';
 import {
   View,
-  Dimensions,
   ImageBackground,
   StyleSheet,
   Text,
   Image,
   ScrollView,
+  Pressable,
+  Alert
 } from "react-native";
+import * as Linking from 'expo-linking';
 import { StackScreenProps } from "../App";
 import { LinearGradient } from "expo-linear-gradient";
 import NewsArticleModel from "../models/NewsArticleModel";
 import { useTheme } from "@react-navigation/native";
 import { useColorScheme } from "react-native";
+//localization
+import { useTranslation } from "react-i18next";
 
 function NewsDetailsScreen({ route }: StackScreenProps<"NewsDetails">) {
   const itemDetails: NewsArticleModel = route.params.itemDetails;
@@ -21,6 +26,23 @@ function NewsDetailsScreen({ route }: StackScreenProps<"NewsDetails">) {
   //theme
   const { colors } = useTheme();
   const scheme = useColorScheme();
+  //localization
+  const { t } = useTranslation();
+
+  let url = itemDetails.url
+  const handlePress = useCallback(async () => {
+    // Checking if the link is supported for links with custom URL scheme.
+    const supported = await Linking.canOpenURL(url);
+
+    if (supported) {
+      // Opening the link with some app, if the URL scheme is "http" the web link should be opened
+      // by some browser in the mobile
+      await Linking.openURL(url);
+    } else {
+      Alert.alert(`You need to install "${url.split(":")[0]}" App to open this URL: ${url}`);
+    }
+  }, [url]);
+
   let gradientBackGroundEnd = scheme === "dark" ? "#DE9954" : "#0B5345";
   return (
     <LinearGradient
@@ -51,6 +73,9 @@ function NewsDetailsScreen({ route }: StackScreenProps<"NewsDetails">) {
                 </Text>
               </View>
             </View>
+            <Pressable style={[styles.buttonStyle, {backgroundColor: colors.border}]} onPress={handlePress} >
+              <Text style={[styles.textInButtonStyle, {color: colors.text}]} >{t('common:openLink')}</Text>
+            </Pressable>
           </View>
         </ScrollView>
       </ImageBackground>
@@ -113,4 +138,20 @@ const styles = StyleSheet.create({
   publishedAtStyle: {
     marginLeft: 16,
   },
+  buttonStyle: {
+      alignItems: 'center',
+      justifyContent: 'center',
+      paddingVertical: 12,
+      paddingHorizontal: 32,
+      borderRadius: 6,
+      elevation: 3,
+      margin: 16,
+      marginBottom: 70
+    },
+    textInButtonStyle: {
+      fontSize: 16,
+      lineHeight: 21,
+      fontWeight: 'bold',
+      letterSpacing: 0.25,
+    },
 });

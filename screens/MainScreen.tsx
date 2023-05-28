@@ -51,7 +51,7 @@ function MainScreen({ navigation }: StackScreenProps<"News">) {
   const fetchUser = async () => {
     /// get data from api
     const url =
-      "https://newsapi.org/v2/everything?q=tesla&from=2023-04-27&sortBy=publishedAt&language=" +
+      "https://newsapi.org/v2/everything?q=tesla&language=" +
       lang +
       "&apiKey=" +
       API_KEY;
