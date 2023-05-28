@@ -32,15 +32,13 @@ https://github.com/esraaMaged/NewsFeed/assets/15037761/4f636dd3-f535-4459-846c-1
 
 IOS lightmode:
 
-
-<img width="463" alt="Screenshot 2023-05-27 at 11 05 35 PM" src="https://github.com/esraaMaged/NewsFeed/assets/15037761/a2546203-d5f9-4319-b1b0-c060df2ce3bb">
+<img width="463" alt="Screenshot 2023-05-28 at 6 07 32 PM" src="https://github.com/esraaMaged/NewsFeed/assets/15037761/68aeaec6-2278-4d49-8e37-df50601429c9">
 <img width="463" alt="Screenshot 2023-05-27 at 11 05 23 PM" src="https://github.com/esraaMaged/NewsFeed/assets/15037761/9d32a558-2a4f-42cb-8d3c-01d3af3fba37">
 
 
 IOS darkmode:
 
-
-<img width="463" alt="Screenshot 2023-05-27 at 11 04 03 PM" src="https://github.com/esraaMaged/NewsFeed/assets/15037761/ae46900f-2910-4b56-b62f-e8496f692b80">
+<img width="419" alt="Screenshot 2023-05-28 at 6 07 07 PM" src="https://github.com/esraaMaged/NewsFeed/assets/15037761/492d8458-797a-46ad-b58d-3fd9083d6c74">
 <img width="463" alt="Screenshot 2023-05-27 at 11 03 47 PM" src="https://github.com/esraaMaged/NewsFeed/assets/15037761/77083250-c230-4509-ab67-c7f9f992f71b">
 
 
