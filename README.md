@@ -41,6 +41,13 @@ IOS darkmode:
 <img width="419" alt="Screenshot 2023-05-28 at 6 07 07 PM" src="https://github.com/esraaMaged/NewsFeed/assets/15037761/492d8458-797a-46ad-b58d-3fd9083d6c74">
 <img width="463" alt="Screenshot 2023-05-27 at 11 03 47 PM" src="https://github.com/esraaMaged/NewsFeed/assets/15037761/77083250-c230-4509-ab67-c7f9f992f71b">
 
+Arabic Localization:
+
+<img width="463" alt="Screenshot 2023-05-28 at 6 10 15 PM" src="https://github.com/esraaMaged/NewsFeed/assets/15037761/89d01c30-3c5d-45e6-a97a-902ea8cdb0fc">
+<img width="463" alt="Screenshot 2023-05-28 at 6 10 07 PM" src="https://github.com/esraaMaged/NewsFeed/assets/15037761/73e161df-7877-42d8-b80b-bcb8d1f28d42">
+<img width="463" alt="Screenshot 2023-05-28 at 6 09 59 PM" src="https://github.com/esraaMaged/NewsFeed/assets/15037761/b60e7349-6f97-43e5-a48c-aabdfb69f031">
+
+
 
 Andriod:
 
