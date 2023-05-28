@@ -19,6 +19,7 @@ typed word
 
 # In order to try Deep Links to the app, try:
 **for Settings screen:**  npx uri-scheme open "exp://127.0.0.1:19000/--/NewsBottomTabs/Settings" --ios 
+
 **for Main News screen:** npx uri-scheme open "exp://127.0.0.1:19000/--/NewsBottomTabs/News" --ios
 
 
